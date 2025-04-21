@@ -104,6 +104,11 @@ public class Player : MonoBehaviour
                 if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
                 {
                     interactObj.Interact();
+                    Debug.Log("Raycast hit");
+                }
+                else
+                {
+                    Debug.Log("Raycast hit invalid");
                 }
             }
         }
