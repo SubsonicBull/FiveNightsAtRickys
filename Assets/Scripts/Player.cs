@@ -38,10 +38,14 @@ public class Player : MonoBehaviour
 
         if (!new_using_CCTV)
         {
+            Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+            Cursor.SetCursor(null, screenCenter, CursorMode.Auto);
             Cursor.lockState = CursorLockMode.Locked;
         }
         else
-        {
+        { 
+            Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+            Cursor.SetCursor(null, screenCenter, CursorMode.Auto);
             Cursor.lockState = CursorLockMode.None;
         }
     }
