@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CCTV : MonoBehaviour, IInteractable 
 {
@@ -11,6 +12,8 @@ public class CCTV : MonoBehaviour, IInteractable
     public GameObject camsparent;
     public GameObject canvas;
     int camIndex = 0;
+    public Button nextCamButton;
+    public AudioSource nextCamSound;
 
     void Awake()
     {
@@ -67,6 +70,8 @@ public class CCTV : MonoBehaviour, IInteractable
         {
             cams[index].gameObject.SetActive(true);
         }
+
+        nextCamSound.Play();
     }
 
     public void SwitchCam()
@@ -74,4 +79,6 @@ public class CCTV : MonoBehaviour, IInteractable
         camIndex = (camIndex + 1) % cams.Count;
         ActivateCam(camIndex);
     }
+
+
 }
