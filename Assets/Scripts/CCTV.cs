@@ -41,6 +41,7 @@ public class CCTV : MonoBehaviour, IInteractable
         cams[0].gameObject.SetActive(true);
     }
 
+
     public void Interact()
     {
         if (CCTV_display.IsKeywordEnabled("_EMISSION"))
@@ -79,6 +80,4 @@ public class CCTV : MonoBehaviour, IInteractable
         camIndex = (camIndex + 1) % cams.Count;
         ActivateCam(camIndex);
     }
-
-
 }

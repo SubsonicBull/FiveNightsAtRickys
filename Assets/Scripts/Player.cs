@@ -32,11 +32,14 @@ public class Player : MonoBehaviour
     //CCTV
     bool using_CCTV;
 
+    //Flashlight
+    public GameObject flashlight;
+
     public void Set_using_CCTV(bool new_using_CCTV)
     {
         using_CCTV = new_using_CCTV;
 
-        if (!new_using_CCTV)
+        if (!using_CCTV)
         {
             Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
             Cursor.SetCursor(null, screenCenter, CursorMode.Auto);
@@ -56,8 +59,16 @@ public class Player : MonoBehaviour
 
         InteractorSource = playerCam;
     }
-    
+
     void Update()
+    {
+        if(!PauseMenu.gamePaused)
+        {
+            FakeUpdate();
+        }
+    }
+
+    void FakeUpdate()
     {
         //Player Movement
 
@@ -82,14 +93,14 @@ public class Player : MonoBehaviour
 
         //Camera Movement
 
-        float mouseX = Input.GetAxis("Mouse X") * Sensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * Sensitivity * Time.deltaTime;
-
-        xRot -= mouseY;
-        xRot = Mathf.Clamp(xRot, -90f, 90f);
-
         if(!using_CCTV)
         {
+            float mouseX = Input.GetAxis("Mouse X") * Sensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * Sensitivity * Time.deltaTime;
+
+            xRot -= mouseY;
+            xRot = Mathf.Clamp(xRot, -90f, 90f);
+
             playerCam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
             playerBody.Rotate(Vector3.up * mouseX);
         }
@@ -104,12 +115,22 @@ public class Player : MonoBehaviour
                 if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
                 {
                     interactObj.Interact();
-                    Debug.Log("Raycast hit");
                 }
-                else
-                {
-                    Debug.Log("Raycast hit invalid");
-                }
+            }
+        }
+
+
+        //Flashlight
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            if (flashlight.activeSelf)
+            {
+                flashlight.SetActive(false);
+            }
+            else
+            {
+                flashlight.SetActive(true);
             }
         }
     }
