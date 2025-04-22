@@ -1,4 +1,5 @@
-﻿﻿using System.Collections;
+﻿﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour
     //Cam
     [SerializeField] float Sensitivity = 100f;
     private Transform playerBody;
-    private Transform playerCam;
+    [SerializeField] Transform playerCam;
     private float xRot = 0f;
 
     //Interaction
@@ -58,7 +59,6 @@ public class Player : MonoBehaviour
         crcon = GetComponent<CharacterController>();
         groundcheck = transform.Find("Groundcheck");
         playerBody = GetComponent<Transform>();
-        playerCam = GetComponentInChildren<Camera>().transform;
         flashlight = GetComponentInChildren<Light>().GetComponentInParent<Transform>().gameObject;
     }
 
@@ -113,6 +113,7 @@ public class Player : MonoBehaviour
             playerCam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
             playerBody.Rotate(Vector3.up * mouseX);
         }
+        
 
         //Interaction
 

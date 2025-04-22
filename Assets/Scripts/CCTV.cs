@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class CCTV : MonoBehaviour, IInteractable
     private bool using_CCTV;
     [SerializeField] GameObject camsparent;
     private GameObject canvas;
+    [SerializeField] TMP_Text roomText;
     private int camIndex = 0;
     private AudioSource nextCamSound;
 
@@ -76,6 +78,34 @@ public class CCTV : MonoBehaviour, IInteractable
         if (index >= 0 && index < cams.Count)
         {
             cams[index].gameObject.SetActive(true);
+        }
+
+        switch (camIndex)
+        {
+            case 0:
+                roomText.text = "ballway";
+                break;
+            case 1:
+                roomText.text = "bathroom";
+                break;
+            case 2:
+                roomText.text = "bedroom_1";
+                break;
+            case 3:
+                roomText.text = "dining_room";
+                break;
+            case 4:
+                roomText.text = "vents";
+                break;
+            case 5:
+                roomText.text = "bedroom_2";
+                break;
+            case 6:
+                roomText.text = "front_porch";
+                break;
+            default:
+                roomText.text = "ERROR";
+                break;
         }
 
         nextCamSound.Play();
