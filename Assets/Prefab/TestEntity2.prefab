@@ -123,3 +123,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWaypoint: {fileID: 0}
   spawnpoint: spawnpoint2
+  searchPlayer: 0

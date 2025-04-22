@@ -6,12 +6,18 @@ public class Entity : MonoBehaviour
     private Waypoint spawnPoint;
     [SerializeField] private Waypoint currentWaypoint;
     [SerializeField] private string spawnpoint = "";
+    [SerializeField] private bool searchPlayer = true;
 
     private void Start()
     {
         Spawn();
     }
+
+    //Getter
     public Waypoint GetWaypoint() { return currentWaypoint; }
+    public bool GetSearchPlayer() { return searchPlayer; }
+
+    //Setter
     public void SetWaypoint(Waypoint w) { currentWaypoint = w; }
     void Spawn()
     {

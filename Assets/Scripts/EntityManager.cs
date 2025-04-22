@@ -14,9 +14,9 @@ public class EntityManager : MonoBehaviour
     }
     private void Update()
     {
-        //Call TriggerMove() by time delay
+        //Call TriggerMove() after fixed delay
         timer += Time.deltaTime;
-        if(timer >= 10f)
+        if(timer >= 0.1f)
         {
             timer = 0;
             TriggerMove();
@@ -53,19 +53,34 @@ public class EntityManager : MonoBehaviour
             return;
         }
 
+        //High priority waypoint
         rnd = Random.Range(0, 10);
+        int wayPointIndex = 0;
         Waypoint nextWaypoint;
-        if (rnd > 1)
+        if (rnd > 2)
         {
-            nextWaypoint = ent.GetWaypoint().GetNeighbours()[0];
+            if (ent.GetSearchPlayer())
+            {
+                //First in list
+                wayPointIndex = 0;
+                nextWaypoint = ent.GetWaypoint().GetNeighbours()[0];
+            }
+            else
+            {
+                //Last in list
+                wayPointIndex = ent.GetWaypoint().GetNeighbours().Count - 1;
+                nextWaypoint = ent.GetWaypoint().GetNeighbours()[wayPointIndex];
+            }
         }
+        //Lower priority(all other waypoints)
         else
         {
-            rnd = Random.Range(1, ent.GetWaypoint().GetNeighbours().Count);
+            rnd = Random.Range(0, ent.GetWaypoint().GetNeighbours().Count);
+            wayPointIndex = rnd;
             nextWaypoint = ent.GetWaypoint().GetNeighbours()[rnd];
         }
         bool allOccupied = true;
-        for(int i = rnd; i < ent.GetWaypoint().GetNeighbours().Count; i++)
+        for(int i = wayPointIndex; i < ent.GetWaypoint().GetNeighbours().Count; i++)
         {
             if (!ent.GetWaypoint().GetNeighbours()[i].IsOccupied())
             {
@@ -76,7 +91,7 @@ public class EntityManager : MonoBehaviour
         }
         if (allOccupied)
         {
-            for (int i = 0; i < rnd; i++)
+            for (int i = 0; i < wayPointIndex; i++)
             {
                 if (!ent.GetWaypoint().GetNeighbours()[i].IsOccupied())
                 {
