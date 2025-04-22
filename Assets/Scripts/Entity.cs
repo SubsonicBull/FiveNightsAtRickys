@@ -3,17 +3,19 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    [SerializeField] private Waypoint spawnPoint;
+    private Waypoint spawnPoint;
     [SerializeField] private Waypoint currentWaypoint;
+    [SerializeField] private string spawnpoint = "";
 
     private void Start()
     {
-        transform.position = spawnPoint.transform.position;
+        Spawn();
     }
     public Waypoint GetWaypoint() { return currentWaypoint; }
     public void SetWaypoint(Waypoint w) { currentWaypoint = w; }
     void Spawn()
     {
+        spawnPoint = GameObject.Find(spawnpoint).GetComponent<Waypoint>();
         transform.position = spawnPoint.transform.position;
         currentWaypoint = spawnPoint;
         currentWaypoint.Occupy();

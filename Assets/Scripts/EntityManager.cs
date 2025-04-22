@@ -10,6 +10,7 @@ public class EntityManager : MonoBehaviour
     private void Start()
     {
         TriggerSpawn();
+        TriggerSpawn();
     }
     private void Update()
     {
@@ -27,15 +28,17 @@ public class EntityManager : MonoBehaviour
     {
         int rnd = Random.Range(0, entities.Count);
         Entity ent = entities[rnd];
-        entitiesAwake.Add(ent);
-        entities.Remove(ent);
+        entitiesAwake.Add(Instantiate(ent.gameObject).GetComponent<Entity>());
 
-        Instantiate(ent.gameObject);
+        //maybe not so great because prefab is removed
+        entities.Remove(ent);
     }
 
     //Moves Random Entity to next Waypoint
     void TriggerMove()
     {
+        Debug.Log("Moved");
+
         if (entitiesAwake.Count == 0)
         {
             return;
@@ -43,6 +46,12 @@ public class EntityManager : MonoBehaviour
 
         int rnd = Random.Range(0, entitiesAwake.Count);
         Entity ent = entitiesAwake[rnd];
+
+        if (ent.GetWaypoint().GetNeighbours().Count == 0)
+        {
+            Debug.Log("no neighbours");
+            return;
+        }
 
         rnd = Random.Range(0, 10);
         Waypoint nextWaypoint;
@@ -60,6 +69,7 @@ public class EntityManager : MonoBehaviour
         {
             if (!ent.GetWaypoint().GetNeighbours()[i].IsOccupied())
             {
+                nextWaypoint = ent.GetWaypoint().GetNeighbours()[i];
                 allOccupied = false;
                 break;
             }
@@ -70,6 +80,7 @@ public class EntityManager : MonoBehaviour
             {
                 if (!ent.GetWaypoint().GetNeighbours()[i].IsOccupied())
                 {
+                    nextWaypoint = ent.GetWaypoint().GetNeighbours()[i];
                     allOccupied = false;
                     break;
                 }
@@ -78,9 +89,9 @@ public class EntityManager : MonoBehaviour
         if (allOccupied)
         {
             TriggerMove();
+            return;
         }
-        
-
+        ent.Move(nextWaypoint);
     }
     
 }
