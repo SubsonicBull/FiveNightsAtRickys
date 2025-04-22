@@ -16,7 +16,7 @@ public class Entity : MonoBehaviour
     {
         transform.position = spawnPoint.transform.position;
         currentWaypoint = spawnPoint;
-        currentWaypoint.Occupie();
+        currentWaypoint.Occupy();
     }
 
     public void Move(Waypoint newWaypoint)
@@ -24,6 +24,6 @@ public class Entity : MonoBehaviour
         currentWaypoint.Free();
         transform.position = newWaypoint.transform.position;
         currentWaypoint = newWaypoint;
-        currentWaypoint.Occupie();
+        currentWaypoint.Occupy();
     }
 }
