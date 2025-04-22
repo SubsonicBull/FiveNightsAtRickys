@@ -47823,6 +47823,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMaster
       objectReference: {fileID: 0}
+    - target: {fileID: 6323423013906005876, guid: 96036e5f394ae0245870bf607516c6e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7947937524628192595, guid: 96036e5f394ae0245870bf607516c6e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.3244245

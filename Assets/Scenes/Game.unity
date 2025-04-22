@@ -42521,12 +42521,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4487224973674293005, guid: 4a51f7cf17ca70e429f152d6124f6590, type: 3}
+      propertyPath: speed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487224973674293005, guid: 4a51f7cf17ca70e429f152d6124f6590, type: 3}
       propertyPath: flashlight
       value: 
       objectReference: {fileID: 1249391919}
     - target: {fileID: 4487224973674293005, guid: 4a51f7cf17ca70e429f152d6124f6590, type: 3}
       propertyPath: InteractRange
-      value: 20
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5150327623737723934, guid: 4a51f7cf17ca70e429f152d6124f6590, type: 3}
       propertyPath: m_Name
@@ -44805,7 +44809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &6360438801734252209
 MonoBehaviour:
   m_ObjectHideFlags: 0

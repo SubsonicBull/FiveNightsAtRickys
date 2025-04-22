@@ -10,30 +10,30 @@ interface IInteractable
 public class Player : MonoBehaviour
 {
     //Movement
-    public float speed;
+    [SerializeField] float speed;
     private float gravity = 1f;
-    public CharacterController crcon;
-    public Transform groundcheck;
-    public float distancetoground;
-    public LayerMask groundLayerMask;
-    Vector3 velocity;
-    bool isGrounded;
+    private CharacterController crcon;
+    private Transform groundcheck;
+    private float distancetoground;
+    [SerializeField] LayerMask groundLayerMask;
+    private Vector3 velocity;
+    private bool isGrounded;
 
     //Cam
-    public float Sensitivity = 100f;
-    public Transform playerBody;
-    public Transform playerCam;
-    float xRot = 0f;
+    [SerializeField] float Sensitivity = 100f;
+    private Transform playerBody;
+    private Transform playerCam;
+    private float xRot = 0f;
 
     //Interaction
     private Transform InteractorSource;
-    public float InteractRange;
+    [SerializeField] float InteractRange;
 
     //CCTV
-    bool using_CCTV;
+    private bool using_CCTV;
 
     //Flashlight
-    public GameObject flashlight;
+    private GameObject flashlight;
 
     public void Set_using_CCTV(bool new_using_CCTV)
     {
@@ -52,7 +52,16 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
     }
-    
+
+    void Awake()
+    {
+        crcon = GetComponent<CharacterController>();
+        groundcheck = transform.Find("Groundcheck");
+        playerBody = GetComponent<Transform>();
+        playerCam = GetComponentInChildren<Camera>().transform;
+        flashlight = GetComponentInChildren<Light>().GetComponentInParent<Transform>().gameObject;
+    }
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;

@@ -6,20 +6,26 @@ public class CCTV : MonoBehaviour, IInteractable
 {
 
     private Material CCTV_display;
-    public Player player_sc;
-    public List<Camera> cams;
-    bool using_CCTV;
-    public GameObject camsparent;
-    public GameObject canvas;
-    int camIndex = 0;
-    public Button nextCamButton;
-    public AudioSource nextCamSound;
+    [SerializeField] Player player_sc;
+    private List<Camera> cams;
+    private bool using_CCTV;
+    [SerializeField] GameObject camsparent;
+    private GameObject canvas;
+    private int camIndex = 0;
+    private AudioSource nextCamSound;
 
     void Awake()
     {
         CCTV_display = GetComponent<Renderer>().material;
+
+        canvas = GetComponentInChildren<Canvas>().gameObject;
+
+        nextCamSound = GetComponentInChildren<AudioSource>();
+
         using_CCTV = false;
+
         CCTV_display.DisableKeyword("_EMISSION");
+        
         canvas.SetActive(false);
 
         cams = new List<Camera>();

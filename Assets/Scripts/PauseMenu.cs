@@ -4,18 +4,17 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
 
-    public GameObject pauseMenu;
-    CursorLockMode previousCursorLockMode;
+    [SerializeField] GameObject pauseMenu;
+    private CursorLockMode previousCursorLockMode;
     public static bool gamePaused;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         pauseMenu.SetActive(false);
         gamePaused = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
