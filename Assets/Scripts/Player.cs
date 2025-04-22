@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     private bool using_CCTV;
 
     //Flashlight
-    private GameObject flashlight;
+    [SerializeField] GameObject flashlight;
 
     public void Set_using_CCTV(bool new_using_CCTV)
     {
@@ -59,7 +59,6 @@ public class Player : MonoBehaviour
         crcon = GetComponent<CharacterController>();
         groundcheck = transform.Find("Groundcheck");
         playerBody = GetComponent<Transform>();
-        flashlight = GetComponentInChildren<Light>().GetComponentInParent<Transform>().gameObject;
     }
 
     private void Start()
