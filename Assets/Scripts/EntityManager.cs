@@ -6,6 +6,8 @@ public class EntityManager : MonoBehaviour
     [SerializeField] private List<Entity> entities = new List<Entity>();
     private List<Entity> entitiesAwake = new List<Entity>();
     private float timer = 0f;
+    private bool attackOngoing = false;
+    private Entity attackingEntity;
 
     private void Start()
     {
@@ -15,11 +17,22 @@ public class EntityManager : MonoBehaviour
     private void Update()
     {
         //Call TriggerMove() after fixed delay
-        timer += Time.deltaTime;
-        if(timer >= 0.1f)
+        if (!attackOngoing)
         {
-            timer = 0;
-            TriggerMove();
+            timer += Time.deltaTime;
+            if (timer >= 1f)
+            {
+                timer = 0;
+                TriggerMove();
+                TryRandomAttack();
+            }
+        }
+        else
+        {
+            if (!attackingEntity.GetIsAttacking())
+            {
+                attackOngoing = false;
+            }
         }
     }
 
@@ -30,7 +43,7 @@ public class EntityManager : MonoBehaviour
         Entity ent = entities[rnd];
         entitiesAwake.Add(Instantiate(ent.gameObject).GetComponent<Entity>());
 
-        //maybe not so great because prefab is removed
+        //maybe not so great because prefab is removed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         entities.Remove(ent);
     }
 
@@ -72,6 +85,7 @@ public class EntityManager : MonoBehaviour
                 nextWaypoint = ent.GetWaypoint().GetNeighbours()[wayPointIndex];
             }
         }
+
         //Lower priority(all other waypoints)
         else
         {
@@ -109,4 +123,30 @@ public class EntityManager : MonoBehaviour
         ent.Move(nextWaypoint);
     }
     
+    //Tries an attack from one radnom entity on an Attack-Waypoint
+    void TryRandomAttack()
+    {
+        List<Entity> entsOnAttackPoint = GetEntitiesOnAttackPoints();
+        if (entsOnAttackPoint.Count != 0)
+        {
+            int rnd = Random.Range(0, entsOnAttackPoint.Count);
+            attackOngoing = true;
+            attackingEntity = entsOnAttackPoint[rnd];
+            entsOnAttackPoint[rnd].Attack();
+        }
+    }
+
+    //returns all entities on attackpoints
+    List<Entity> GetEntitiesOnAttackPoints()
+    {
+        List<Entity> entitiesOnAttackPoints = new List<Entity>();
+        foreach(Entity e in entitiesAwake)
+        {
+            if (e.GetWaypoint().GetIsAttackPoint())
+            {
+                entitiesOnAttackPoints.Add(e);
+            }
+        }
+        return entitiesOnAttackPoints;
+    }
 }
