@@ -2,9 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
+    //UI
+    [SerializeField] private GameObject interactionUI;
+    [SerializeField] private TMP_Text interactionDescribtionText;
+    [SerializeField] private TMP_Text interactionDurationText;
+
     //Movement
     [SerializeField] float speed;
     private float gravity = 1f;
@@ -26,17 +33,20 @@ public class Player : MonoBehaviour
     [SerializeField] float InteractRange;
     private bool locked;
     private bool isInteractingWithUI = false;
+    private bool interacting = false;
     private Interactable currentInteractable;
+    private float interactionTimer = 0f;
 
     //Flashlight
     [SerializeField] GameObject flashlight;
 
-    //Locks players movement and camera-movemnet
+    //Locks/Unlocks players movement and camera-movemnet
     public void LockPlayer(bool l)
     {
         locked = l;
     }
 
+    //Unlocks/Locks Cursor
     public void UnlockCursor(bool l)
     {
         if (!l)
@@ -53,6 +63,31 @@ public class Player : MonoBehaviour
         }
     }
 
+    void DisplayInteractionUI()
+    {
+        interactionUI.SetActive(true);
+    }
+
+    void HideInteractionUI()
+    {
+        interactionUI.SetActive(false);
+    }
+
+    void InteractionDone()
+    {
+        HideInteractionUI();
+        if (currentInteractable.GetLocksPlayer())
+        {
+            LockPlayer(false);
+        }
+        if (currentInteractable.GetUnlocksCursor())
+        {
+            UnlockCursor(false);
+        }
+        interacting = false;
+        currentInteractable.Done.RemoveListener(InteractionDone);
+    }
+
     void Awake()
     {
         crcon = GetComponent<CharacterController>();
@@ -65,17 +100,19 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         InteractorSource = playerCam;
+
+        HideInteractionUI();
     }
 
     void Update()
     {
         if(!PauseMenu.gamePaused)
         {
-            FakeUpdate();
+            DoUpdate();
         }
     }
 
-    void FakeUpdate()
+    void DoUpdate()
     {
         //Player Movement
 
@@ -153,20 +190,42 @@ public class Player : MonoBehaviour
                         }
                         if (interactObj.GetIsUIInteraction())
                         {
+                            //Interaction with UI
                             interactObj.UIInteract();
                             isInteractingWithUI = true;
                         }
                         else
                         {
                             //Interaction that requires time
+                            DisplayInteractionUI();
+                            interactionTimer = currentInteractable.GetDuration();
+                            interactionDescribtionText.text = currentInteractable.GetDescribtion();
+                            currentInteractable.Done.AddListener(InteractionDone);
+                            currentInteractable.StartInteraction();
+                            interacting = true;
                         }
                     }
                 }
             }          
         }
 
+        //Interaction with duration
+        if (Input.GetKey(KeyCode.E) && interacting)
+        {
+            interactionDurationText.text = (Mathf.Round(interactionTimer)).ToString() + " sec";
+            interactionTimer -= Time.deltaTime;
+        }
+        else
+        {
+            if (interacting)
+            {
+                currentInteractable.StoppInteraction();
+                InteractionDone();
+            }
+        }
 
-        //Flashlight
+
+        //Toggle Flashlight
 
         if(Input.GetKeyDown(KeyCode.F))
         {
