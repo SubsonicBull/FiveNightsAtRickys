@@ -3,11 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-interface IInteractable
-{
-    public void Interact();
-}
-
 public class Player : MonoBehaviour
 {
     //Movement
@@ -29,25 +24,29 @@ public class Player : MonoBehaviour
     //Interaction
     private Transform InteractorSource;
     [SerializeField] float InteractRange;
-
-    //CCTV
-    private bool using_CCTV;
+    private bool locked;
+    private bool isInteractingWithUI = false;
+    private Interactable currentInteractable;
 
     //Flashlight
     [SerializeField] GameObject flashlight;
 
-    public void Set_using_CCTV(bool new_using_CCTV)
+    //Locks players movement and camera-movemnet
+    public void LockPlayer(bool l)
     {
-        using_CCTV = new_using_CCTV;
+        locked = l;
+    }
 
-        if (!using_CCTV)
+    public void UnlockCursor(bool l)
+    {
+        if (!l)
         {
             Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
             Cursor.SetCursor(null, screenCenter, CursorMode.Auto);
             Cursor.lockState = CursorLockMode.Locked;
         }
         else
-        { 
+        {
             Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
             Cursor.SetCursor(null, screenCenter, CursorMode.Auto);
             Cursor.lockState = CursorLockMode.None;
@@ -90,7 +89,7 @@ public class Player : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        if(!using_CCTV)
+        if(!locked)
         {
             Vector3 move = transform.right * x + transform.forward * z;
             crcon.Move(move * speed * Time.deltaTime);
@@ -101,7 +100,7 @@ public class Player : MonoBehaviour
 
         //Camera Movement
 
-        if(!using_CCTV)
+        if(!locked)
         {
             float mouseX = Input.GetAxis("Mouse X") * Sensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * Sensitivity * Time.deltaTime;
@@ -118,14 +117,52 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
-            if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange))
+            if (isInteractingWithUI)
             {
-                if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
+                if (currentInteractable.GetIsUIInteraction())
                 {
-                    interactObj.Interact();
+                    currentInteractable.QuitUIInteraction();
+                    if (currentInteractable.GetLocksPlayer())
+                    {
+                        LockPlayer(false);
+                    }
+                    if (currentInteractable.GetUnlocksCursor())
+                    {
+                        UnlockCursor(false);
+                    }
+                    isInteractingWithUI = false;
+                    Debug.Log("Quit UI-Innteraction");
                 }
             }
+            else
+            {
+                Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
+                if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange))
+                {
+                    if (hitInfo.collider.gameObject.TryGetComponent(out Interactable interactObj))
+                    {
+                        Debug.Log("Interacting with: " + interactObj.gameObject.name);
+                        currentInteractable = interactObj;
+                        if (interactObj.GetLocksPlayer())
+                        {
+                            LockPlayer(true);
+                        }
+                        if (interactObj.GetUnlocksCursor())
+                        {
+                            UnlockCursor(true);
+                        }
+                        if (interactObj.GetIsUIInteraction())
+                        {
+                            interactObj.UIInteract();
+                            isInteractingWithUI = true;
+                        }
+                        else
+                        {
+                            //Interaction that requires time
+                        }
+                    }
+                }
+            }          
         }
 
 

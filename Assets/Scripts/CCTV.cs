@@ -3,11 +3,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CCTV : MonoBehaviour, IInteractable 
+public class CCTV : Interactable
 {
 
     private Material CCTV_display;
-    [SerializeField] Player player_sc;
     private List<Camera> cams;
     private bool using_CCTV;
     [SerializeField] GameObject camsparent;
@@ -18,6 +17,11 @@ public class CCTV : MonoBehaviour, IInteractable
 
     void Awake()
     {
+        //Setting Up Interaction
+        SetIsUIInteraction(true);
+        SetLocksPlayer(true);
+        SetUnlocksCursor(true);
+
         CCTV_display = GetComponent<Renderer>().material;
 
         canvas = GetComponentInChildren<Canvas>().gameObject;
@@ -50,22 +54,18 @@ public class CCTV : MonoBehaviour, IInteractable
     }
 
 
-    public void Interact()
+    public override void UIInteract()
     {
-        if (CCTV_display.IsKeywordEnabled("_EMISSION"))
-        {
-            CCTV_display.DisableKeyword("_EMISSION");
-            using_CCTV = false;
-            player_sc.Set_using_CCTV(using_CCTV);
-            canvas.SetActive(false);
-        }
-        else
-        {
-            CCTV_display.EnableKeyword("_EMISSION");
-            using_CCTV = true;
-            player_sc.Set_using_CCTV(using_CCTV);
-            canvas.SetActive(true);
-        }
+        CCTV_display.EnableKeyword("_EMISSION");
+        using_CCTV = true;
+        canvas.SetActive(true);
+    }
+
+    public override void QuitUIInteraction()
+    {
+        CCTV_display.DisableKeyword("_EMISSION");
+        using_CCTV = false;
+        canvas.SetActive(false);
     }
 
     void ActivateCam(int index)

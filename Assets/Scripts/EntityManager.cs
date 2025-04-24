@@ -20,7 +20,7 @@ public class EntityManager : MonoBehaviour
         if (!attackOngoing)
         {
             timer += Time.deltaTime;
-            if (timer >= 1f)
+            if (timer >= 5f)
             {
                 timer = 0;
                 TriggerMove();
