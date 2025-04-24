@@ -36981,7 +36981,7 @@ GameObject:
   - component: {fileID: 1698831062}
   - component: {fileID: 1698831061}
   m_Layer: 0
-  m_Name: ReferencePerson
+  m_Name: FloatingCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
