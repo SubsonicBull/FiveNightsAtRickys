@@ -41,5 +41,6 @@ public class HideComic : Interactable
             hidden = true;
             ActionMaster.SetComicHidden(true);
         }
+        Done.Invoke();
     }
 }
