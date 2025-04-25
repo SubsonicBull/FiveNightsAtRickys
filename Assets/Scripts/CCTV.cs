@@ -21,6 +21,7 @@ public class CCTV : Interactable
         SetIsUIInteraction(true);
         SetLocksPlayer(true);
         SetUnlocksCursor(true);
+        SetName("Cameras");
 
         CCTV_display = GetComponent<Renderer>().material;
 
