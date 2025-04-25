@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
     //UI
     [SerializeField] private GameObject interactionUI;
     [SerializeField] private TMP_Text interactionDescribtionText;
-    [SerializeField] private TMP_Text interactionDurationText;
+    [SerializeField] private ProgressBar progressbar;
+    [SerializeField] private TMP_Text interactionNameText;
 
     //Movement
     [SerializeField] float speed;
@@ -148,7 +149,36 @@ public class Player : MonoBehaviour
             playerCam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
             playerBody.Rotate(Vector3.up * mouseX);
         }
-        
+
+
+        //Checking for interactables in front of player to display Name
+        Ray ray = new Ray(InteractorSource.position, InteractorSource.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, InteractRange) && !interacting)
+        {
+            if (hit.collider.gameObject.TryGetComponent(out Interactable interactable))
+            {
+                if (!interactable.GetIsUIInteraction())
+                {
+                    interactionNameText.gameObject.SetActive(true);
+                    string interName = interactable.GetInteractionName();
+                    interactionNameText.text = interName;
+                }
+            }
+            else
+            {
+                if (interactionNameText.gameObject.activeSelf)
+                {
+                    interactionNameText.gameObject.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            if (interactionNameText.gameObject.activeSelf)
+            {
+                interactionNameText.gameObject.SetActive(false);
+            }
+        }
 
         //Interaction
 
@@ -212,7 +242,7 @@ public class Player : MonoBehaviour
         //Interaction with duration
         if (Input.GetKey(KeyCode.E) && interacting)
         {
-            interactionDurationText.text = (Mathf.Round(interactionTimer)).ToString() + " sec";
+            progressbar.SetProgress(interactionTimer / currentInteractable.GetDuration());
             interactionTimer -= Time.deltaTime;
         }
         else

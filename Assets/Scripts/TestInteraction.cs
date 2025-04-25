@@ -8,7 +8,8 @@ public class TestInteraction : Interactable
         SetIsUIInteraction(false);
         SetLocksPlayer(true);
         SetUnlocksCursor(false);
-        SetDescribtion("move cube");
+        SetDescribtion("moving cube...");
+        SetName("Move Cube");
         SetDuration(5f);
     }
 

@@ -7,7 +7,8 @@ public abstract class Interactable : MonoBehaviour
     private bool unlocksCursor = false;
     private bool isUIInteraction = true;
     private float duration = 1f;
-    private string describtion = "unnamed_interaction";
+    private string describtion = "performing unnamed_interaction";
+    private string interactionName = "unnamed_interaction";
     public UnityEvent Done = new UnityEvent();
 
     //Getters
@@ -18,6 +19,7 @@ public abstract class Interactable : MonoBehaviour
     public float GetDuration() { return duration; }
 
     public string GetDescribtion() { return describtion; }
+    public string GetInteractionName() { return interactionName; }
 
     //Setters
     public void SetLocksPlayer(bool b) { locksPlayer = b; }
@@ -27,6 +29,7 @@ public abstract class Interactable : MonoBehaviour
     public void SetDuration(float d) { duration = d; }
 
     public void SetDescribtion(string d) { describtion = d; }
+    public void SetName(string s) { interactionName = s; }
 
     //Function to override for UI-interaction
     public virtual void UIInteract()
