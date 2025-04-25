@@ -19,6 +19,7 @@ public class Radio : Interactable
         displayText.text = songs[currentSongIndex].name;
         audioS.clip = songs[currentSongIndex];
         audioS.Play();
+        ActionMaster.SetSong(songs[currentSongIndex].name);
         radioUI.SetActive(false);
     }
 
