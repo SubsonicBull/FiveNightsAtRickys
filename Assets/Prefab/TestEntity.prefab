@@ -125,10 +125,14 @@ MonoBehaviour:
   isAttacking: 0
   currentWaypoint: {fileID: 0}
   spawnpoint: spawnpoint1
-  searchPlayer: 0
+  searchPlayer: 1
   offset: {x: 0, y: 0, z: 0}
   attackSpeed: 5
   audioSource: {fileID: 8108889988087365778}
+  chasePlayer: 0
+  moveSpeed: 3
+  rotationSpeed: 5
+  character: 0
 --- !u!82 &8108889988087365778
 AudioSource:
   m_ObjectHideFlags: 0
