@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -8,6 +9,9 @@ public class Entity : MonoBehaviour
     [SerializeField] private Waypoint currentWaypoint;
     [SerializeField] private string spawnpoint = "";
     [SerializeField] private bool searchPlayer = true;
+    [SerializeField] private Vector3 offset;
+    [SerializeField] private float attackSpeed = 5f;
+    [SerializeField] private AudioSource audioSource;
 
     private void Start()
     {
@@ -36,7 +40,8 @@ public class Entity : MonoBehaviour
     void Spawn()
     {
         spawnPoint = GameObject.Find(spawnpoint).GetComponent<Waypoint>();
-        transform.position = spawnPoint.transform.position;
+        transform.position = spawnPoint.transform.position + offset;
+        transform.rotation = spawnPoint.GetRotation();
         currentWaypoint = spawnPoint;
         currentWaypoint.Occupy();
     }
@@ -45,7 +50,8 @@ public class Entity : MonoBehaviour
     public void Move(Waypoint newWaypoint)
     {
         currentWaypoint.Free();
-        transform.position = newWaypoint.transform.position;
+        transform.position = newWaypoint.transform.position + offset;
+        transform.rotation = newWaypoint.GetRotation();
         currentWaypoint = newWaypoint;
         currentWaypoint.Occupy();
     }
@@ -55,6 +61,39 @@ public class Entity : MonoBehaviour
     {
         Debug.Log("Attack!");
         isAttacking = true;
-        transform.position = GameObject.Find("Camera").transform.position + GameObject.Find("Camera").transform.forward * 2;
+        audioSource.Play();
+        Invoke("Enter", 3f);
+    }
+
+    void Enter()
+    {
+        currentWaypoint.GetEnteringAction().Action();
+        MoveToEnteringPos(currentWaypoint.GetEnteringAction().GetEnteringPos() + offset, currentWaypoint.GetEnteringAction().GetEnteringRot());
+    }
+
+    //Lerp Towards EnteringPos and Rot
+    public void MoveToEnteringPos(Vector3 targetPosition, Quaternion targetRotation)
+    {
+        StartCoroutine(MoveCoroutine(targetPosition, targetRotation));
+    }
+
+    private IEnumerator MoveCoroutine(Vector3 targetPos, Quaternion targetRot)
+    {
+        Vector3 startPos = transform.position;
+        Quaternion startRot = transform.rotation;
+        float elapsed = 0f;
+
+        while (elapsed < attackSpeed)
+        {
+            float t = elapsed / attackSpeed;
+            transform.position = Vector3.Lerp(startPos, targetPos, t);
+            transform.rotation = Quaternion.Slerp(startRot, targetRot, t);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPos;
+        transform.rotation = targetRot;
     }
 }
