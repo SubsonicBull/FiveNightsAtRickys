@@ -10,11 +10,19 @@ public class Entity : MonoBehaviour
     [SerializeField] private string spawnpoint = "";
     [SerializeField] private bool searchPlayer = true;
     [SerializeField] private Vector3 offset;
-    [SerializeField] private float attackSpeed = 8f;
+    [SerializeField] private float attackSpeed = 5f;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private bool chasePlayer = false;
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private characterName character;
+
+    private Quaternion lastRot;
+    private Vector3 lastPos;
+    private enum characterName
+    {
+        Ricky,Lukas,Riceman
+    }
 
     private Transform player;
 
@@ -27,13 +35,6 @@ public class Entity : MonoBehaviour
 
     private void Update()
     {
-        //Experimental Defend
-        if (Input.GetKeyDown("g"))
-        {
-            Move(currentWaypoint);
-            isAttacking = false;
-        }
-
         //Chase Player
         if (chasePlayer)
         {
@@ -87,12 +88,42 @@ public class Entity : MonoBehaviour
     void Enter()
     {
         currentWaypoint.GetEnteringAction().Action();
-        MoveToEnteringPos(currentWaypoint.GetEnteringAction().GetEnteringPos() + offset, currentWaypoint.GetEnteringAction().GetEnteringRot());
-        Invoke("ChasePlayer", 6f);
+        lastPos = transform.position;
+        lastRot = transform.rotation;
+        MoveToPos(currentWaypoint.GetEnteringAction().GetEnteringPos() + offset, currentWaypoint.GetEnteringAction().GetEnteringRot());
+        bool requiredCharacterActions = false;
+        bool requiredHidingSpot = false;
+
+        //required character specific actions
+        switch (character)
+        {
+            case characterName.Ricky:
+                requiredCharacterActions = (ActionMaster.GetSong() == "Phonk");
+                break;
+            case characterName.Lukas:
+                requiredCharacterActions = (ActionMaster.GetSong() == "ugh");
+                requiredCharacterActions = !ActionMaster.GetComicHidden();
+                break;
+            case characterName.Riceman:
+                requiredCharacterActions = (ActionMaster.GetSong() == "off");
+                requiredCharacterActions = ActionMaster.GetRiceHidden();
+                break;
+        }
+
+        requiredHidingSpot = (ActionMaster.GetHidingSpot() == currentWaypoint.GetRequiredHidingSpot());
+
+        if (!requiredCharacterActions || !requiredHidingSpot)
+        {
+            Invoke("ChasePlayer", 6f);
+        }
+        else
+        {
+            Invoke("StopAttack", 6f);
+        }
     }
 
     //Lerp Towards EnteringPos and Rot
-    public void MoveToEnteringPos(Vector3 targetPosition, Quaternion targetRotation)
+    public void MoveToPos(Vector3 targetPosition, Quaternion targetRotation)
     {
         StartCoroutine(MoveCoroutine(targetPosition, targetRotation));
     }
@@ -122,5 +153,20 @@ public class Entity : MonoBehaviour
         transform.position = currentWaypoint.GetEnteringAction().GetJumpscarePos() + offset;
         transform.rotation = currentWaypoint.GetEnteringAction().GetJumpscareRot();
         chasePlayer = true;
+    }
+
+    //Stop Attack
+
+    void StopAttack()
+    {
+        MoveToPos(lastPos, lastRot);
+        currentWaypoint.GetEnteringAction().Action();
+        Invoke("GoBackToWaypoint", 6f);
+    }
+
+    void GoBackToWaypoint()
+    {
+        Move(currentWaypoint);
+        isAttacking = false;
     }
 }

@@ -47,5 +47,6 @@ public class Radio : Interactable
             audioS.Play();
         }
         displayText.text = songs[currentSongIndex].name;
+        ActionMaster.SetSong(songs[currentSongIndex].name);
     }
 }

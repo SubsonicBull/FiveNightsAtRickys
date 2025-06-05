@@ -8,11 +8,13 @@ public class Waypoint : MonoBehaviour
     [SerializeField] private List<Waypoint> neighbours = new List<Waypoint>();
     [SerializeField] private Quaternion rot;
     [SerializeField] private EnteringAction enteringAction;
+    [SerializeField] private string requiredHidingSpot = "couch";
     public List<Waypoint> GetNeighbours() { return neighbours; }
 
     public EnteringAction GetEnteringAction() { return enteringAction; }
 
     public bool GetIsAttackPoint() { return isAttackPoint; }
+    public string GetRequiredHidingSpot() { return requiredHidingSpot; }
     public bool IsOccupied() { return occupied; }
     public Quaternion GetRotation() { return rot; }
     public void Occupy() { occupied = true; }
