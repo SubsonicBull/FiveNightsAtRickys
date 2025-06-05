@@ -10,12 +10,19 @@ public class Entity : MonoBehaviour
     [SerializeField] private string spawnpoint = "";
     [SerializeField] private bool searchPlayer = true;
     [SerializeField] private Vector3 offset;
-    [SerializeField] private float attackSpeed = 5f;
+    [SerializeField] private float attackSpeed = 8f;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private bool chasePlayer = false;
+    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float rotationSpeed = 5f;
+
+    private Transform player;
+
 
     private void Start()
     {
         Spawn();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     private void Update()
@@ -25,6 +32,18 @@ public class Entity : MonoBehaviour
         {
             Move(currentWaypoint);
             isAttacking = false;
+        }
+
+        //Chase Player
+        if (chasePlayer)
+        {
+
+            Vector3 direction = player.position - transform.position;
+            direction.y = 0f;
+            direction.Normalize();
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
     }
 
@@ -69,6 +88,7 @@ public class Entity : MonoBehaviour
     {
         currentWaypoint.GetEnteringAction().Action();
         MoveToEnteringPos(currentWaypoint.GetEnteringAction().GetEnteringPos() + offset, currentWaypoint.GetEnteringAction().GetEnteringRot());
+        Invoke("ChasePlayer", 6f);
     }
 
     //Lerp Towards EnteringPos and Rot
@@ -95,5 +115,12 @@ public class Entity : MonoBehaviour
 
         transform.position = targetPos;
         transform.rotation = targetRot;
+    }
+
+    void ChasePlayer()
+    {
+        transform.position = currentWaypoint.GetEnteringAction().GetJumpscarePos() + offset;
+        transform.rotation = currentWaypoint.GetEnteringAction().GetJumpscareRot();
+        chasePlayer = true;
     }
 }

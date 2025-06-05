@@ -2303,7 +2303,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enteringPos: {fileID: 1957029896}
+  jumpscarePos: {fileID: 1795007041}
   enterinRot: {x: -0.24184474, y: 0.664463, z: -0.24184474, w: 0.664463}
+  jumpscareRot: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   rotationAngle: 90
   rotationSpeed: 2
 --- !u!1001 &118166312
@@ -39868,6 +39870,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b866cd89eeadfa14183bdbb8272c67a8, type: 3}
+--- !u!1 &1795007040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1795007041}
+  m_Layer: 0
+  m_Name: JumpscarePos1
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1795007041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795007040}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.08, y: 0.708, z: 2.486}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1796768267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49515,3 +49548,4 @@ SceneRoots:
   - {fileID: 185122575}
   - {fileID: 1871833312}
   - {fileID: 1957029896}
+  - {fileID: 1795007041}
