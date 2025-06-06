@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     //Flashlight
     [SerializeField] GameObject flashlight;
 
-    //Locks/Unlocks players movement and camera-movemnet
+    //Locks/Unlocks players movement and camera-movement
     public void LockPlayer(bool l)
     {
         locked = l;

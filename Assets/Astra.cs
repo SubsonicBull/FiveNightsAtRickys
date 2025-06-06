@@ -10,15 +10,35 @@ public class Astra : MonoBehaviour
     [SerializeField] private GameObject particles;
     [SerializeField] private List<GameObject> destroyables = new List<GameObject>();
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip horn;
+    [SerializeField] private AudioClip crash;
+    [SerializeField] private GameObject lights;
 
     private void Start()
     {
         startPos = transform.position;
         endPos = transform.position + transform.forward * distance;
+        lights.SetActive(false);
+    }
+
+    public void TurnOnLights()
+    {
+        lights.SetActive(true);
+    }
+    public void TurnOffLights()
+    {
+        lights.SetActive(false);
+    }
+
+    public void Honk()
+    {
+        audioSource.clip = horn;
+        audioSource.Play();
     }
 
     public void Go()
     {
+        audioSource.clip = crash;
         audioSource.Play();
         Invoke("StartDriving", 0.5f);
     }
