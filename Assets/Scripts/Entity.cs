@@ -106,12 +106,10 @@ public class Entity : MonoBehaviour
                 requiredCharacterActions = (ActionMaster.GetSong() == "Phonk");
                 break;
             case characterName.Lukas:
-                requiredCharacterActions = (ActionMaster.GetSong() == "ugh");
-                requiredCharacterActions = !ActionMaster.GetComicHidden();
+                requiredCharacterActions = (ActionMaster.GetSong() == "ugh" && !ActionMaster.GetComicHidden());
                 break;
             case characterName.Riceman:
-                requiredCharacterActions = (ActionMaster.GetSong() == "off");
-                requiredCharacterActions = ActionMaster.GetRiceHidden();
+                requiredCharacterActions = (ActionMaster.GetSong() == "off" && ActionMaster.GetRiceHidden());
                 break;
         }
 
