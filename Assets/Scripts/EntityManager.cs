@@ -13,6 +13,7 @@ public class EntityManager : MonoBehaviour
     {
         TriggerSpawn();
         TriggerSpawn();
+        TriggerSpawn();
     }
     private void Update()
     {
@@ -20,7 +21,7 @@ public class EntityManager : MonoBehaviour
         if (!attackOngoing)
         {
             timer += Time.deltaTime;
-            if (timer >= 3f)
+            if (timer >= 10f)
             {
                 timer = 0;
                 TriggerMove();
@@ -133,6 +134,13 @@ public class EntityManager : MonoBehaviour
             attackOngoing = true;
             attackingEntity = entsOnAttackPoint[rnd];
             entsOnAttackPoint[rnd].Attack();
+
+            //makes sure that entity, who just attacked tends to run away from player
+            foreach (Entity e in entitiesAwake)
+            {
+                e.SetSearchPlayer(true);
+            }
+            entsOnAttackPoint[rnd].SetSearchPlayer(false);
         }
     }
 

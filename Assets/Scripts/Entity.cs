@@ -55,6 +55,7 @@ public class Entity : MonoBehaviour
 
     //Setter
     public void SetWaypoint(Waypoint w) { currentWaypoint = w; }
+    public void SetSearchPlayer(bool b) { searchPlayer = b; }
 
     //Entity goes to spawnpoint and occupies it
     void Spawn()

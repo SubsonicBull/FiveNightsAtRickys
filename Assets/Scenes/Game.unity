@@ -1780,8 +1780,7 @@ MonoBehaviour:
   neighbours:
   - {fileID: 947797007}
   - {fileID: 1145275476}
-  - {fileID: 1541588648}
-  rot: {x: 0, y: 0, z: 0, w: 0}
+  rot: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   enteringAction: {fileID: 0}
   requiredHidingSpot: couch
 --- !u!4 &93714398
@@ -1793,7 +1792,7 @@ Transform:
   m_GameObject: {fileID: 93714396}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.93, y: 0, z: -4.95}
+  m_LocalPosition: {x: -4.03, y: 0, z: -3.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11495,7 +11494,7 @@ MonoBehaviour:
   - {fileID: 1683591273}
   rot: {x: 0, y: 0, z: 0, w: 0}
   enteringAction: {fileID: 1167042817}
-  requiredHidingSpot: couch
+  requiredHidingSpot: armchair
 --- !u!4 &499915897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3156354097344894912, guid: b866cd89eeadfa14183bdbb8272c67a8, type: 3}
@@ -17498,6 +17497,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3156354097344894912, guid: b866cd89eeadfa14183bdbb8272c67a8, type: 3}
   m_PrefabInstance: {fileID: 953780688}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &752207012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 752207013}
+  - component: {fileID: 752207014}
+  m_Layer: 0
+  m_Name: spawnpoint3
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: fd12dbe3b63ae464f824b4a74c0e1766, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &752207013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752207012}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.673, y: 0, z: 9.037}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1085285628}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &752207014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752207012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6490d37dc475841a593a0c33c1f04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  occupied: 0
+  isAttackPoint: 0
+  neighbours:
+  - {fileID: 2053526488}
+  rot: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  enteringAction: {fileID: 0}
+  requiredHidingSpot: couch
 --- !u!1001 &753097080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18712,6 +18762,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1149148706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &815402598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 815402599}
+  - component: {fileID: 815402600}
+  m_Layer: 0
+  m_Name: waypoint15
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: f82dfc5fc3c5a8f4080a3550427019c8, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &815402599
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815402598}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.67, y: -3.4, z: -11.22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1085285628}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &815402600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815402598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6490d37dc475841a593a0c33c1f04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  occupied: 0
+  isAttackPoint: 0
+  neighbours:
+  - {fileID: 1485038219}
+  - {fileID: 977285278}
+  rot: {x: 0, y: 0, z: 0, w: 0}
+  enteringAction: {fileID: 0}
+  requiredHidingSpot: couch
 --- !u!4 &816324663 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
@@ -22907,6 +23009,58 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b866cd89eeadfa14183bdbb8272c67a8, type: 3}
+--- !u!1 &977285277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 977285279}
+  - component: {fileID: 977285278}
+  m_Layer: 0
+  m_Name: waypoint14
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: f82dfc5fc3c5a8f4080a3550427019c8, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &977285278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977285277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6490d37dc475841a593a0c33c1f04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  occupied: 0
+  isAttackPoint: 0
+  neighbours:
+  - {fileID: 815402600}
+  - {fileID: 1145275476}
+  rot: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  enteringAction: {fileID: 0}
+  requiredHidingSpot: couch
+--- !u!4 &977285279
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977285277}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.47, y: 0, z: -6.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1085285628}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &982799517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25102,6 +25256,7 @@ Transform:
   m_Children:
   - {fileID: 1208993343}
   - {fileID: 1937533555}
+  - {fileID: 752207013}
   - {fileID: 1145275477}
   - {fileID: 93714398}
   - {fileID: 947797006}
@@ -25115,6 +25270,10 @@ Transform:
   - {fileID: 1683591274}
   - {fileID: 770367474}
   - {fileID: 498767894}
+  - {fileID: 977285279}
+  - {fileID: 815402599}
+  - {fileID: 1815917437}
+  - {fileID: 2053526487}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1088542325
@@ -26549,8 +26708,8 @@ MonoBehaviour:
   occupied: 0
   isAttackPoint: 0
   neighbours:
+  - {fileID: 977285278}
   - {fileID: 93714397}
-  - {fileID: 947797007}
   rot: {x: 0, y: 0, z: 0, w: 0}
   enteringAction: {fileID: 0}
   requiredHidingSpot: couch
@@ -26868,7 +27027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enteringPos: {fileID: 153520663}
   jumpscarePos: {fileID: 150475329}
-  enterinRot: {x: 0.34202012, y: 0, z: 0, w: 0.9396926}
+  enterinRot: {x: 0, y: 0, z: -0.34202012, w: 0.9396926}
   jumpscareRot: {x: 0, y: 0, z: 0, w: 1}
   rotationAngle: 90
   rotationSpeed: 2
@@ -35036,7 +35195,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entities:
   - {fileID: 2697839225795449720, guid: 0403c07287319ad498429f790b98e965, type: 3}
-  - {fileID: 7672140521040682586, guid: c809b4cb19149b941bd6e5f5e485658d, type: 3}
+  - {fileID: 2697839225795449720, guid: 37577828b0bb69d4d92bec7efc846d4d, type: 3}
+  - {fileID: 2697839225795449720, guid: 12c18f1a42cc8b541b62b25801ba0d7c, type: 3}
 --- !u!4 &1559500481
 Transform:
   m_ObjectHideFlags: 0
@@ -39176,6 +39336,73 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1743007142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1743007145}
+  - component: {fileID: 1743007144}
+  - component: {fileID: 1743007143}
+  m_Layer: 0
+  m_Name: HidingSpotArmchair
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1743007143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743007142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fb7d4590cb3d941aa16073b8849656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hidingSpotName: armchair
+--- !u!65 &1743007144
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743007142}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1, z: 0.94300437}
+  m_Center: {x: 0, y: 0, z: 0.16693246}
+--- !u!4 &1743007145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743007142}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.354, y: 0.546, z: 2.886}
+  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1745499066 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3156354097344894912, guid: b866cd89eeadfa14183bdbb8272c67a8, type: 3}
@@ -40587,6 +40814,58 @@ Transform:
   - {fileID: 1450851742}
   - {fileID: 1136146156}
   m_Father: {fileID: 243208232}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1815917435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1815917437}
+  - component: {fileID: 1815917436}
+  m_Layer: 0
+  m_Name: waypoint16
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: f82dfc5fc3c5a8f4080a3550427019c8, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1815917436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815917435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6490d37dc475841a593a0c33c1f04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  occupied: 0
+  isAttackPoint: 0
+  neighbours:
+  - {fileID: 1541588648}
+  - {fileID: 2053526488}
+  rot: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
+  enteringAction: {fileID: 117843993}
+  requiredHidingSpot: couch
+--- !u!4 &1815917437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815917435}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.8, y: 0, z: 9.58}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1085285628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1817377837
 PrefabInstance:
@@ -45095,6 +45374,57 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1910077127}
   m_SourcePrefab: {fileID: 100100000, guid: c17851160e84c094380e93ac07b799ab, type: 3}
+--- !u!1 &2053526486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2053526487}
+  - component: {fileID: 2053526488}
+  m_Layer: 0
+  m_Name: waypoint17
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: f82dfc5fc3c5a8f4080a3550427019c8, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2053526487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053526486}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.42, y: 0, z: 10.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1085285628}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2053526488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053526486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6490d37dc475841a593a0c33c1f04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  occupied: 0
+  isAttackPoint: 0
+  neighbours:
+  - {fileID: 1815917436}
+  rot: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
+  enteringAction: {fileID: 117843993}
+  requiredHidingSpot: couch
 --- !u!4 &2057874366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3156354097344894912, guid: b866cd89eeadfa14183bdbb8272c67a8, type: 3}
@@ -49960,6 +50290,7 @@ SceneRoots:
   - {fileID: 543450652427737965}
   - {fileID: 341110901}
   - {fileID: 185122575}
+  - {fileID: 1743007145}
   - {fileID: 1871833312}
   - {fileID: 1957029896}
   - {fileID: 153520663}
