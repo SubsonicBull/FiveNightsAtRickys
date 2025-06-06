@@ -17,6 +17,9 @@ public class Entity : MonoBehaviour
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private characterName character;
 
+    [SerializeField] private AudioClip sign;
+    [SerializeField] private AudioClip jumpscareSound;
+
     private Quaternion lastRot;
     private Vector3 lastPos;
     private enum characterName
@@ -82,6 +85,7 @@ public class Entity : MonoBehaviour
     {
         Debug.Log("Attack!");
         isAttacking = true;
+        audioSource.clip = sign;
         audioSource.Play();
         Invoke("Enter", 3f);
     }
@@ -154,6 +158,18 @@ public class Entity : MonoBehaviour
         transform.position = currentWaypoint.GetEnteringAction().GetJumpscarePos() + offset;
         transform.rotation = currentWaypoint.GetEnteringAction().GetJumpscareRot();
         chasePlayer = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (chasePlayer && other.gameObject.tag == "Player")
+        {
+            GameObject.Find("GameOver").GetComponent<GameOver>().Over();
+            chasePlayer = false;
+            player.gameObject.GetComponent<Player>().LockPlayer(true);
+            audioSource.clip = jumpscareSound;
+            audioSource.Play();
+        }
     }
 
     //Stop Attack

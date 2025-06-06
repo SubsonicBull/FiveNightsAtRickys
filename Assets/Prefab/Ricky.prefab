@@ -2282,6 +2282,7 @@ GameObject:
   - component: {fileID: 3930724012454221771}
   - component: {fileID: 2697839225795449720}
   - component: {fileID: 8256515973904681946}
+  - component: {fileID: 1196985152022186159}
   m_Layer: 0
   m_Name: Ricky
   m_TagString: Untagged
@@ -2356,6 +2357,12 @@ MonoBehaviour:
   offset: {x: 0, y: -0.65, z: 0}
   attackSpeed: 5
   audioSource: {fileID: 8256515973904681946}
+  chasePlayer: 0
+  moveSpeed: 3
+  rotationSpeed: 5
+  character: 0
+  sign: {fileID: 8300000, guid: 5c426d459572522478cc10ab1bddf9b0, type: 3}
+  jumpscareSound: {fileID: 8300000, guid: 1cdf64821428ea447b078e79715c6019, type: 3}
 --- !u!82 &8256515973904681946
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2453,6 +2460,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &1196985152022186159
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6905249554200043778}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7118765251063077586
 GameObject:
   m_ObjectHideFlags: 0
