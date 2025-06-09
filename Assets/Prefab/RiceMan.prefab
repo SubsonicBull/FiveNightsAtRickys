@@ -2358,8 +2358,8 @@ MonoBehaviour:
   attackSpeed: 5
   audioSource: {fileID: 8256515973904681946}
   chasePlayer: 0
-  moveSpeed: 3
-  rotationSpeed: 5
+  moveSpeed: 20
+  rotationSpeed: 20
   character: 2
   sign: {fileID: 8300000, guid: 5c426d459572522478cc10ab1bddf9b0, type: 3}
   jumpscareSound: {fileID: 8300000, guid: 1cdf64821428ea447b078e79715c6019, type: 3}
@@ -2420,7 +2420,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

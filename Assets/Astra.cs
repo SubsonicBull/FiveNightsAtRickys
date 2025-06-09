@@ -19,6 +19,9 @@ public class Astra : MonoBehaviour
         startPos = transform.position;
         endPos = transform.position + transform.forward * distance;
         lights.SetActive(false);
+        /*TurnOnLights();
+        Honk();
+        Invoke("Go", 6f);*/
     }
 
     public void TurnOnLights()
