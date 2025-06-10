@@ -15523,7 +15523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clockText: {fileID: 1575050023}
-  timeTillNextTime: 20
+  timeTillNextTime: 60
 --- !u!1001 &663625607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46755,7 +46755,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 7baa39394255a3c4e8805212fdb9f1bb, type: 3}
   m_Resource: {fileID: 8300000, guid: 7baa39394255a3c4e8805212fdb9f1bb, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.743
+  m_Volume: 0.308
   m_Pitch: 1
   Loop: 1
   Mute: 0

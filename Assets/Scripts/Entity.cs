@@ -20,6 +20,9 @@ public class Entity : MonoBehaviour
     [SerializeField] private AudioClip sign;
     [SerializeField] private AudioClip jumpscareSound;
 
+    private bool checkForPlayer = false;
+    private bool executeAttack = false;
+
     private Quaternion lastRot;
     private Vector3 lastPos;
     private enum characterName
@@ -49,6 +52,35 @@ public class Entity : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
+
+        //Checking for Player and required actions/hidingspot
+        if (checkForPlayer && !executeAttack)
+        {
+            bool requiredCharacterActions = false;
+            bool requiredHidingSpot = false;
+
+            //required character specific actions
+            switch (character)
+            {
+                case characterName.Ricky:
+                    requiredCharacterActions = (ActionMaster.GetSong() == "Phonk");
+                    break;
+                case characterName.Lukas:
+                    requiredCharacterActions = (ActionMaster.GetSong() == "ugh" && !ActionMaster.GetComicHidden());
+                    break;
+                case characterName.Riceman:
+                    requiredCharacterActions = (ActionMaster.GetSong() == "off" && ActionMaster.GetRiceHidden());
+                    break;
+            }
+
+            requiredHidingSpot = (ActionMaster.GetHidingSpot() == currentWaypoint.GetRequiredHidingSpot() && ActionMaster.GetPlayerHidden());
+
+            if (!requiredCharacterActions || !requiredHidingSpot)
+            {
+                executeAttack = true;
+            }
+        }
+        Debug.Log(executeAttack.ToString() + " " + checkForPlayer.ToString());
     }
 
     //Getter
@@ -92,37 +124,12 @@ public class Entity : MonoBehaviour
 
     void Enter()
     {
+        checkForPlayer = true;
         currentWaypoint.GetEnteringAction().Action();
         lastPos = transform.position;
         lastRot = transform.rotation;
         MoveToPos(currentWaypoint.GetEnteringAction().GetEnteringPos() + offset, currentWaypoint.GetEnteringAction().GetEnteringRot());
-        bool requiredCharacterActions = false;
-        bool requiredHidingSpot = false;
-
-        //required character specific actions
-        switch (character)
-        {
-            case characterName.Ricky:
-                requiredCharacterActions = (ActionMaster.GetSong() == "Phonk");
-                break;
-            case characterName.Lukas:
-                requiredCharacterActions = (ActionMaster.GetSong() == "ugh" && !ActionMaster.GetComicHidden());
-                break;
-            case characterName.Riceman:
-                requiredCharacterActions = (ActionMaster.GetSong() == "off" && ActionMaster.GetRiceHidden());
-                break;
-        }
-
-        requiredHidingSpot = (ActionMaster.GetHidingSpot() == currentWaypoint.GetRequiredHidingSpot());
-
-        if (!requiredCharacterActions || !requiredHidingSpot)
-        {
-            Invoke("ChasePlayer", 6f);
-        }
-        else
-        {
-            Invoke("StopAttack", 6f);
-        }
+        Invoke("ChasePlayer", 15f);
     }
 
     //Lerp Towards EnteringPos and Rot
@@ -153,9 +160,18 @@ public class Entity : MonoBehaviour
 
     void ChasePlayer()
     {
-        transform.position = currentWaypoint.GetEnteringAction().GetJumpscarePos() + offset;
-        transform.rotation = currentWaypoint.GetEnteringAction().GetJumpscareRot();
-        chasePlayer = true;
+        if (executeAttack)
+        {
+            transform.position = currentWaypoint.GetEnteringAction().GetJumpscarePos() + offset;
+            transform.rotation = currentWaypoint.GetEnteringAction().GetJumpscareRot();
+            chasePlayer = true;
+        }
+        else
+        {
+            StopAttack();
+        }
+        executeAttack = false;
+        checkForPlayer = false;
     }
 
     private void OnTriggerEnter(Collider other)

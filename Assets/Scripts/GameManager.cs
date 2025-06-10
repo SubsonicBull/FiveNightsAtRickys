@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
             switch (night)
             {
                 case 1:
-                    moveTime = (float)Random.Range(15, 30);
+                    moveTime = (float)Random.Range(3, 5);
                     break;
                 case 2:
                     moveTime = (float)Random.Range(15, 20);
