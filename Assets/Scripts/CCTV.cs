@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CCTV : Interactable
 {
-
     private Material CCTV_display;
     private List<Camera> cams;
     private bool using_CCTV;
@@ -111,7 +110,6 @@ public class CCTV : Interactable
 
         nextCamSound.Play();
     }
-
     public void SwitchCam()
     {
         camIndex = (camIndex + 1) % cams.Count;

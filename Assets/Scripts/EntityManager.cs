@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class EntityManager : MonoBehaviour
 {
-    [SerializeField] private List<Entity> entities = new List<Entity>();
+    [SerializeField] private List<Entity> entityPrefabs = new List<Entity>();
+    private List<Entity> entities = new List<Entity>();
     private List<Entity> entitiesAwake = new List<Entity>();
     private float timer = 0f;
     private bool attackOngoing = false;
@@ -11,24 +12,11 @@ public class EntityManager : MonoBehaviour
 
     private void Start()
     {
-        TriggerSpawn();
-        TriggerSpawn();
-        TriggerSpawn();
+        ResetEntities();
     }
     private void Update()
     {
-        //Call TriggerMove() after fixed delay
-        if (!attackOngoing)
-        {
-            timer += Time.deltaTime;
-            if (timer >= 10f)
-            {
-                timer = 0;
-                TriggerMove();
-                TryRandomAttack();
-            }
-        }
-        else
+        if (attackOngoing)
         {
             if (!attackingEntity.GetIsAttacking())
             {
@@ -37,19 +25,41 @@ public class EntityManager : MonoBehaviour
         }
     }
 
-    //Spawns random entity at Spawnpoint
-    void TriggerSpawn()
+    //Resets Entities
+    public void ResetEntities()
     {
-        int rnd = Random.Range(0, entities.Count);
-        Entity ent = entities[rnd];
-        entitiesAwake.Add(Instantiate(ent.gameObject).GetComponent<Entity>());
+        entities.Clear();
+        foreach(Entity e in entityPrefabs)
+        {
+            entities.Add(e);
+        }
+        foreach (Entity e in entitiesAwake)
+        {
+            Destroy(e.gameObject);
+        }
+        entitiesAwake.Clear();
+    }
 
-        //maybe not so great because prefab is removed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public bool GetAtackOngoing()
+    {
+        return attackOngoing;
+    }
+
+
+    //Spawns random entity at Spawnpoint
+    public void TriggerSpawn(int i)
+    {
+        if (i == -1)
+        {
+            i = Random.Range(0, entities.Count);
+        }
+        Entity ent = entities[i];
+        entitiesAwake.Add(Instantiate(ent.gameObject).GetComponent<Entity>());
         entities.Remove(ent);
     }
 
     //Moves Random Entity to next Waypoint
-    void TriggerMove()
+    public void TriggerMove()
     {
         Debug.Log("Moved");
 
@@ -125,7 +135,7 @@ public class EntityManager : MonoBehaviour
     }
     
     //Tries an attack from one radnom entity on an Attack-Waypoint
-    void TryRandomAttack()
+    public void TryRandomAttack()
     {
         List<Entity> entsOnAttackPoint = GetEntitiesOnAttackPoints();
         if (entsOnAttackPoint.Count != 0)
