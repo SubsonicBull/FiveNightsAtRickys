@@ -68,7 +68,7 @@ public class NightUIManager : MonoBehaviour
         im.color = new Color(im.color.r, im.color.g, im.color.b, 1f);
 
         ChangeText(nightT);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         Hide();
     }
 

@@ -9,6 +9,7 @@ public class EntityManager : MonoBehaviour
     private float timer = 0f;
     private bool attackOngoing = false;
     private Entity attackingEntity;
+    private int recursionCounter = 0;
 
     private void Start()
     {
@@ -140,8 +141,18 @@ public class EntityManager : MonoBehaviour
         }
         if (allOccupied)
         {
-            TriggerMove();
-            return;
+            recursionCounter++;
+            if (recursionCounter > 20)
+            {
+                return;
+                Debug.Log("StackOverflowSituation");
+            }
+            else
+            {
+                TriggerMove();
+                recursionCounter = 0;
+                return;
+            }
         }
         ent.Move(nextWaypoint);
     }
