@@ -38,6 +38,11 @@ public class NightUIManager : MonoBehaviour
         StartCoroutine(DispNightUI(t, st));
     }
 
+    public void DisplayStartUI(string t)
+    {
+        StartCoroutine(DispStartUI(t));
+    }
+
     IEnumerator DispNightUI(string nightText, bool showTime)
     {
         Show();
@@ -48,6 +53,22 @@ public class NightUIManager : MonoBehaviour
         }
         ChangeText(nightText);
         yield return new WaitForSeconds(2f);
+        Hide();
+    }
+
+    IEnumerator DispStartUI(string nightT)
+    {
+        while(im == null)
+        {
+            yield return null;
+        }
+
+        nightUI.SetActive(true);
+        nightText.color = new Color(nightText.color.r, nightText.color.g, nightText.color.b, 1f);
+        im.color = new Color(im.color.r, im.color.g, im.color.b, 1f);
+
+        ChangeText(nightT);
+        yield return new WaitForSeconds(4f);
         Hide();
     }
 

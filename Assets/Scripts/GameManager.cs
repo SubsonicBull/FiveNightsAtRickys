@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float timeTillNextTime;
 
+    [SerializeField] private Astra astra;
+
+    [SerializeField] private Player player;
+
     private int time = 0;
     private float timer = 0;
     private float timer2 = 0;
@@ -18,7 +22,10 @@ public class GameManager : MonoBehaviour
     private int night = 1;
 
     private bool changingNights = false;
+    private bool astraAttackOngoing = false;
+    private bool playerScreamed = false;
     private int searchPlayerResets = 0;
+    private int astraAttacks = 0;
     private int entitiesSpawned = 0;
 
 
@@ -26,7 +33,10 @@ public class GameManager : MonoBehaviour
     {
         eM = GameObject.Find("EnitityManager").GetComponent<EntityManager>();
         nM = GameObject.Find("NightUIManager").GetComponent<NightUIManager>();
-        nM.DisplayNightUI("Night 1", false);
+        changingNights = true;
+        player.LockPlayer(true);
+        nM.DisplayStartUI("Night 1");
+        Invoke("ResetTime", 4f);
     }
 
     private void Update()
@@ -47,20 +57,32 @@ public class GameManager : MonoBehaviour
         if (time == 6)
         {
             changingNights = true;
+            player.LockPlayer(true);
             eM.ResetEntities();
             entitiesSpawned = 0;
-            night++;
-            nM.DisplayNightUI("Night " + night.ToString(), true);
-            time = 0;
-            Invoke("ResetTime", 4f);
+            if (night == 5)
+            {
+                nM.DisplayStartUI("You Survived all 5 nights");
+            }
+            else
+            {
+                night++;
+                nM.DisplayNightUI("Night " + night.ToString(), true);
+                time = 0;
+                Invoke("ResetTime", 3f);
+            }
         }
 
-
+        //Checking for Scream
+        if (astraAttackOngoing && !playerScreamed)
+        {
+            playerScreamed = ActionMaster.GetIsScreaming();
+        }
 
 
         //Nights
 
-        if (changingNights || eM.GetAtackOngoing())
+        if (changingNights || eM.GetAtackOngoing() || astraAttackOngoing)
         {
             return;
         }
@@ -122,6 +144,8 @@ public class GameManager : MonoBehaviour
             case 4:
                 if (time == 1 && entitiesSpawned < 1)
                 {
+                    StartAstraAttack();
+                    astraAttacks++;
                     eM.TriggerSpawn(-1);
                     entitiesSpawned++;
                     timer2 = 0;
@@ -136,20 +160,44 @@ public class GameManager : MonoBehaviour
                     eM.TriggerSpawn(-1);
                     entitiesSpawned++;
                 }
+                if (time == 4 && astraAttacks == 1)
+                {
+                    StartAstraAttack();
+                    astraAttacks++;
+                }
                 break;
 
             case 5:
                 if (time == 1 && entitiesSpawned < 1)
                 {
+                    StartAstraAttack();
+                    astraAttacks++;
                     eM.TriggerSpawn(-1);
                     entitiesSpawned++;
                     timer2 = 0;
                 }
                 if (time == 2 && entitiesSpawned < 2)
                 {
+                    StartAstraAttack();
+                    astraAttacks++;
                     eM.TriggerSpawn(-1);
                     eM.TriggerSpawn(-1);
                     entitiesSpawned += 2;
+                }
+                if (time == 3 && astraAttacks == 2)
+                {
+                    StartAstraAttack();
+                    astraAttacks++;
+                }
+                if (time == 4 && astraAttacks == 3)
+                {
+                    StartAstraAttack();
+                    astraAttacks++;
+                }
+                if (time == 5 && astraAttacks == 4)
+                {
+                    StartAstraAttack();
+                    astraAttacks++;
                 }
                 break;
 
@@ -170,19 +218,22 @@ public class GameManager : MonoBehaviour
             switch (night)
             {
                 case 1:
-                    moveTime = (float)Random.Range(3, 5);
+                    moveTime = (float)Random.Range(10, 18);
                     break;
                 case 2:
-                    moveTime = (float)Random.Range(15, 20);
+                    moveTime = (float)Random.Range(10, 18);
                     break;
                 case 3:
-                    moveTime = (float)Random.Range(10, 20);
+                    moveTime = (float)Random.Range(8, 16);
+                    break;
+                case 4:
+                    moveTime = (float)Random.Range(4, 16);
                     break;
                 case 5:
-                    moveTime = (float)Random.Range(7, 20);
+                    moveTime = (float)Random.Range(3, 10);
                     break;
                 default:
-                    moveTime = (float)Random.Range(15, 45);
+                    moveTime = (float)Random.Range(10, 18);
                     break;
             }
         }
@@ -199,6 +250,7 @@ public class GameManager : MonoBehaviour
         time = 0;
         timer = 0;
         changingNights = false;
+        player.LockPlayer(false);
     }
 
     void UpdateClockText()
@@ -210,6 +262,27 @@ public class GameManager : MonoBehaviour
         else
         {
             clockText.text = "0" + time.ToString() + ":" + Mathf.Floor(timer / timeTillNextTime * 60).ToString() + " AM";
+        }
+    }
+
+    void StartAstraAttack()
+    {
+        astraAttackOngoing = true;
+        astra.TurnOnLights();
+        astra.Honk();
+        Invoke("StopAstra", 10f);
+    }
+    void StopAstra()
+    {
+        if (playerScreamed)
+        {
+            astra.TurnOffLights();
+            astraAttackOngoing = false;
+            playerScreamed = false;
+        }
+        else
+        {
+            astra.Go();
         }
     }
 }

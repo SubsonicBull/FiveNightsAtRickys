@@ -8,12 +8,14 @@ public static class ActionMaster
     private static bool playerHidden = false;
     private static string song = "off";
     private static string hidingSpotName = "couch";
+    private static bool isScreaming = false;
 
 
     //Setter
     public static void SetComicHidden(bool b) { comicHidden = b; }
     public static void SetRiceHidden(bool b) { riceHidden = b; }
     public static void SetPlayerHidden(bool b) { playerHidden = b; }
+    public static void SetIsScreaming(bool b) { isScreaming = b; }
 
     public static void SetHidingSpot(string s) { hidingSpotName = s; }
     public static void SetSong(string s) { song = s; }
@@ -22,6 +24,7 @@ public static class ActionMaster
     public static bool GetComicHidden() { return comicHidden; }
     public static bool GetRiceHidden() { return riceHidden; }
     public static bool GetPlayerHidden() { return playerHidden; }
+    public static bool GetIsScreaming() { return isScreaming; }
 
     public static string GetHidingSpot() { return hidingSpotName; }
     public static string GetSong() { return song; }

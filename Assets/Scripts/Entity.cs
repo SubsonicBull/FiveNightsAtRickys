@@ -80,7 +80,6 @@ public class Entity : MonoBehaviour
                 executeAttack = true;
             }
         }
-        Debug.Log(executeAttack.ToString() + " " + checkForPlayer.ToString());
     }
 
     //Getter
