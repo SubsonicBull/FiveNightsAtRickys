@@ -87,12 +87,24 @@ public class EntityManager : MonoBehaviour
             {
                 //First in list
                 wayPointIndex = 0;
+
+                //Only one Entity on Attackpoint is allowed
+                if (GetEntitiesOnAttackPoints().Count > 0 && ent.GetWaypoint().GetNeighbours()[0].GetIsAttackPoint())
+                {
+                    return;
+                }
                 nextWaypoint = ent.GetWaypoint().GetNeighbours()[0];
             }
             else
             {
                 //Last in list
                 wayPointIndex = ent.GetWaypoint().GetNeighbours().Count - 1;
+
+                //Only one Entity on Attackpoint is allowed
+                if (GetEntitiesOnAttackPoints().Count > 0 && ent.GetWaypoint().GetNeighbours()[wayPointIndex].GetIsAttackPoint())
+                {
+                    return;
+                }
                 nextWaypoint = ent.GetWaypoint().GetNeighbours()[wayPointIndex];
             }
         }
@@ -166,5 +178,14 @@ public class EntityManager : MonoBehaviour
             }
         }
         return entitiesOnAttackPoints;
+    }
+
+    //Reactivates Searchplayer-Mode on all Entities awake
+    public void ReactivateSearchPlayer()
+    {
+        foreach(Entity e in entitiesAwake)
+        {
+            e.SetSearchPlayer(true);
+        }
     }
 }
