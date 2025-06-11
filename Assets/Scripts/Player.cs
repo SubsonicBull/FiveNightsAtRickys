@@ -94,6 +94,8 @@ public class Player : MonoBehaviour
         crcon = GetComponent<CharacterController>();
         groundcheck = transform.Find("Groundcheck");
         playerBody = GetComponent<Transform>();
+        flashlight.SetActive(false);
+        ActionMaster.SetFlashlightOn(false);
     }
 
     private void Start()
@@ -259,11 +261,14 @@ public class Player : MonoBehaviour
             if (flashlight.activeSelf)
             {
                 flashlight.SetActive(false);
+                ActionMaster.SetFlashlightOn(false);
             }
             else
             {
                 flashlight.SetActive(true);
+                ActionMaster.SetFlashlightOn(true);
             }
         }
     }
+
 }

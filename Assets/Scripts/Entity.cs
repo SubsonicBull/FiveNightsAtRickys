@@ -75,7 +75,7 @@ public class Entity : MonoBehaviour
 
             requiredHidingSpot = (ActionMaster.GetHidingSpot() == currentWaypoint.GetRequiredHidingSpot() && ActionMaster.GetPlayerHidden());
 
-            if (!requiredCharacterActions || !requiredHidingSpot)
+            if (!requiredCharacterActions || !requiredHidingSpot || ActionMaster.GetFlashlightOn())
             {
                 executeAttack = true;
             }
