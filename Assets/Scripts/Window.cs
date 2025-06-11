@@ -9,7 +9,7 @@ public class Window : Interactable
         SetName("scream eieiei");
         SetDescribtion("screaming...");
         SetDuration(0.2f);
-        SetLocksPlayer(true);
+        SetLocksPlayer(false);
         SetUnlocksCursor(false);
     }
 

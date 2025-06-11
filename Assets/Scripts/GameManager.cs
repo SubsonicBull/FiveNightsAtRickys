@@ -253,6 +253,7 @@ public class GameManager : MonoBehaviour
         timer = 0;
         changingNights = false;
         player.LockPlayer(false);
+        ActionMaster.ResetPower();
     }
 
     void UpdateClockText()

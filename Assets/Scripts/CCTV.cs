@@ -15,6 +15,9 @@ public class CCTV : Interactable
     private int camIndex = 0;
     private AudioSource nextCamSound;
 
+    [SerializeField] private float timeTillPowerconsumption = 3f;
+    private float timer = 0;
+
     void Awake()
     {
         //Setting Up Interaction
@@ -54,19 +57,40 @@ public class CCTV : Interactable
         cams[0].gameObject.SetActive(true);
     }
 
+    private void Update()
+    {
+        if (using_CCTV)
+        {
+            timer += Time.deltaTime;
+            if (timer >= timeTillPowerconsumption)
+            {
+                timer = 0;
+                ActionMaster.ConsumePower(1);
+            }
+        }
+        if (ActionMaster.GetPower() == 0 && CCTV_display.IsKeywordEnabled("_EMISSION"))
+        {
+            CCTV_display.DisableKeyword("_EMISSION");
+            canvas.SetActive(false);
+        }
+    }
+
 
     public override void UIInteract()
     {
-        CCTV_display.EnableKeyword("_EMISSION");
+        if (ActionMaster.GetPower() != 0)
+        {
+            CCTV_display.EnableKeyword("_EMISSION");
+            canvas.SetActive(true);
+        }
         using_CCTV = true;
-        canvas.SetActive(true);
     }
 
     public override void QuitUIInteraction()
     {
         CCTV_display.DisableKeyword("_EMISSION");
-        using_CCTV = false;
         canvas.SetActive(false);
+        using_CCTV = false;
     }
 
     void ActivateCam(int index)
@@ -119,7 +143,7 @@ public class CCTV : Interactable
 
     public void BlockVision()
     {
-        if (using_CCTV)
+        if (using_CCTV && ActionMaster.GetPower() != 0)
         {
             GetComponent<Renderer>().material = blockVisionMatierial;
             Invoke("UnblockVision", 1f);

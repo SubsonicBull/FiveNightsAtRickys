@@ -10,6 +10,8 @@ public static class ActionMaster
     private static string hidingSpotName = "couch";
     private static bool isScreaming = false;
 
+    private static int power = 100;
+
 
     //Setter
     public static void SetComicHidden(bool b) { comicHidden = b; }
@@ -19,6 +21,22 @@ public static class ActionMaster
 
     public static void SetHidingSpot(string s) { hidingSpotName = s; }
     public static void SetSong(string s) { song = s; }
+    public static void ResetPower() { power = 100; }
+
+    public static void ConsumePower(int f)
+    {
+        if (power != 0)
+        {
+            if (power < 0)
+            {
+                power = 0;
+            }
+            else
+            {
+                power -= f;
+            }
+        }
+    }
 
     //Getter
     public static bool GetComicHidden() { return comicHidden; }
@@ -28,4 +46,5 @@ public static class ActionMaster
 
     public static string GetHidingSpot() { return hidingSpotName; }
     public static string GetSong() { return song; }
+    public static int GetPower() { return power; }
 }
