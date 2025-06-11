@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CCTV : Interactable
 {
     private Material CCTV_display;
+    [SerializeField] private Material blockVisionMatierial;
     private List<Camera> cams;
     private bool using_CCTV;
     [SerializeField] GameObject camsparent;
@@ -114,5 +115,19 @@ public class CCTV : Interactable
     {
         camIndex = (camIndex + 1) % cams.Count;
         ActivateCam(camIndex);
+    }
+
+    public void BlockVision()
+    {
+        if (using_CCTV)
+        {
+            GetComponent<Renderer>().material = blockVisionMatierial;
+            Invoke("UnblockVision", 1f);
+        }
+    }
+
+    void UnblockVision()
+    {
+        GetComponent<Renderer>().material = CCTV_display;
     }
 }

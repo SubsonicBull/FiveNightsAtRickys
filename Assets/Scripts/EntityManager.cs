@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EntityManager : MonoBehaviour
 {
+    [SerializeField] private CCTV cctv;
     [SerializeField] private List<Entity> entityPrefabs = new List<Entity>();
     private List<Entity> entities = new List<Entity>();
     private List<Entity> entitiesAwake = new List<Entity>();
@@ -50,6 +51,7 @@ public class EntityManager : MonoBehaviour
     //Spawns random entity at Spawnpoint
     public void TriggerSpawn(int i)
     {
+        cctv.BlockVision();
         if (i == -1)
         {
             i = Random.Range(0, entities.Count);
@@ -62,6 +64,7 @@ public class EntityManager : MonoBehaviour
     //Moves Random Entity to next Waypoint
     public void TriggerMove()
     {
+        cctv.BlockVision();
         Debug.Log("Moved");
 
         if (entitiesAwake.Count == 0)
@@ -181,13 +184,17 @@ public class EntityManager : MonoBehaviour
     List<Entity> GetEntitiesOnAttackPoints()
     {
         List<Entity> entitiesOnAttackPoints = new List<Entity>();
-        foreach(Entity e in entitiesAwake)
+        foreach (Entity e in entitiesAwake)
         {
-            if (e.GetWaypoint().GetIsAttackPoint())
+            if (e.GetWaypoint() != null)
             {
-                entitiesOnAttackPoints.Add(e);
+                if (e.GetWaypoint().GetIsAttackPoint())
+                {
+                    entitiesOnAttackPoints.Add(e);
+                }
             }
         }
+
         return entitiesOnAttackPoints;
     }
 

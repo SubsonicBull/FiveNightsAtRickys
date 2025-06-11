@@ -290,6 +290,7 @@ public class GameManager : MonoBehaviour
 
     void BackToMenu()
     {
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("MainMenu");
     }
 }
