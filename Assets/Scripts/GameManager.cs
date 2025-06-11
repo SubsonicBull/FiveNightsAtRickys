@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     private int astraAttacks = 0;
     private int entitiesSpawned = 0;
 
+    private Vector3 playerStartPos;
+    private Quaternion playerStartRotation;
+
 
     private void Start()
     {
@@ -38,6 +41,8 @@ public class GameManager : MonoBehaviour
         player.LockPlayer(true);
         nM.DisplayStartUI("Night 1");
         Invoke("ResetTime", 4f);
+        playerStartPos = player.gameObject.transform.position;
+        playerStartRotation = player.gameObject.transform.rotation;
     }
 
     private void Update()
@@ -253,6 +258,8 @@ public class GameManager : MonoBehaviour
         timer = 0;
         changingNights = false;
         player.LockPlayer(false);
+        player.gameObject.transform.position = playerStartPos;
+        player.gameObject.transform.rotation = playerStartRotation;
         ActionMaster.ResetPower();
     }
 

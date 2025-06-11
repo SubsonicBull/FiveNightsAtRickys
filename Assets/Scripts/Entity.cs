@@ -66,10 +66,10 @@ public class Entity : MonoBehaviour
                     requiredCharacterActions = (ActionMaster.GetSong() == "Phonk");
                     break;
                 case characterName.Lukas:
-                    requiredCharacterActions = (ActionMaster.GetSong() == "ugh" && !ActionMaster.GetComicHidden());
+                    requiredCharacterActions = (ActionMaster.GetSong() == "Metal" && !ActionMaster.GetComicHidden() && !ActionMaster.GetRiceHidden());
                     break;
                 case characterName.Riceman:
-                    requiredCharacterActions = (ActionMaster.GetSong() == "off" && ActionMaster.GetRiceHidden());
+                    requiredCharacterActions = (ActionMaster.GetSong() == "off" && ActionMaster.GetRiceHidden() && ActionMaster.GetComicHidden());
                     break;
             }
 
@@ -118,7 +118,7 @@ public class Entity : MonoBehaviour
         isAttacking = true;
         audioSource.clip = sign;
         audioSource.Play();
-        Invoke("Enter", 3f);
+        Invoke("Enter", 6f);
     }
 
     void Enter()

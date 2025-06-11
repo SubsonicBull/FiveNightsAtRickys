@@ -9,8 +9,11 @@ public class DisplayVignette : MonoBehaviour
     private bool isOn = false;
     private Volume v;
 
+    [SerializeField] private GameObject hiddenText;
+
     private void Start()
     {
+        hiddenText.SetActive(false);
         v = GetComponent<Volume>();
         if (v.profile.TryGet(out Vignette vig))
         {
@@ -36,11 +39,13 @@ public class DisplayVignette : MonoBehaviour
     }
     public void TurnOn()
     {
+        hiddenText.SetActive(true);
         isOn = true;
     }
 
     public void TurnOff()
     {
+        hiddenText.SetActive(false);
         isOn = false;
     }
 }
