@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameOver : MonoBehaviour
     {
         gameoverUI.SetActive(true);
         StartCoroutine(FadeIn());
+        Invoke("BackToMenu", 5f);
     }
     IEnumerator FadeIn()
     {
@@ -40,5 +42,11 @@ public class GameOver : MonoBehaviour
 
         gameOverText.color = new Color(gameOverText.color.r, gameOverText.color.g, gameOverText.color.b, 1f);
         im.color = new Color(im.color.r, im.color.g, im.color.b, 1f);
+    }
+
+    void BackToMenu()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("MainMenu");
     }
 }

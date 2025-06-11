@@ -6672,7 +6672,7 @@ MonoBehaviour:
   neighbours:
   - {fileID: 1683591273}
   - {fileID: 1485038219}
-  rot: {x: 0, y: 0, z: 0, w: 0}
+  rot: {x: 0.61237234, y: -0.3535536, z: 0.5792279, w: 0.40557998}
   enteringAction: {fileID: 0}
   requiredHidingSpot: couch
 --- !u!4 &279024074
@@ -7399,7 +7399,7 @@ MonoBehaviour:
   neighbours:
   - {fileID: 1485038219}
   - {fileID: 947797007}
-  rot: {x: 0, y: 0, z: 0, w: 0}
+  rot: {x: 0, y: 0.9205048, z: 0, w: 0.3907312}
   enteringAction: {fileID: 0}
   requiredHidingSpot: couch
 --- !u!1001 &315395143
@@ -18975,7 +18975,7 @@ MonoBehaviour:
   neighbours:
   - {fileID: 1485038219}
   - {fileID: 977285278}
-  rot: {x: 0, y: 0, z: 0, w: 0}
+  rot: {x: 0.61237234, y: -0.3535536, z: 0.5792279, w: 0.40557998}
   enteringAction: {fileID: 0}
   requiredHidingSpot: couch
 --- !u!4 &816324663 stripped
@@ -27052,7 +27052,7 @@ MonoBehaviour:
   neighbours:
   - {fileID: 977285278}
   - {fileID: 93714397}
-  rot: {x: 0, y: 0, z: 0, w: 0}
+  rot: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   enteringAction: {fileID: 0}
   requiredHidingSpot: couch
 --- !u!4 &1145275477
@@ -28427,7 +28427,7 @@ MonoBehaviour:
   isAttackPoint: 0
   neighbours:
   - {fileID: 1145275476}
-  rot: {x: 0, y: 0, z: 0, w: 0}
+  rot: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   enteringAction: {fileID: 0}
   requiredHidingSpot: couch
 --- !u!4 &1209021707 stripped
@@ -32111,7 +32111,7 @@ MonoBehaviour:
   neighbours:
   - {fileID: 1541588648}
   - {fileID: 1753675747}
-  rot: {x: 0, y: 0, z: 0, w: 0}
+  rot: {x: 0, y: 0.98768836, z: 0, w: 0.15643449}
   enteringAction: {fileID: 0}
   requiredHidingSpot: couch
 --- !u!4 &1393714174
@@ -34241,7 +34241,7 @@ MonoBehaviour:
   neighbours:
   - {fileID: 279024073}
   - {fileID: 314426122}
-  rot: {x: 0, y: 0, z: 0, w: 0}
+  rot: {x: 0.61237234, y: -0.3535536, z: 0.5792279, w: 0.40557998}
   enteringAction: {fileID: 0}
   requiredHidingSpot: couch
 --- !u!4 &1485038220
@@ -38798,7 +38798,7 @@ MonoBehaviour:
   neighbours:
   - {fileID: 770367473}
   - {fileID: 279024073}
-  rot: {x: 0, y: 0, z: 0, w: 0}
+  rot: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   enteringAction: {fileID: 0}
   requiredHidingSpot: couch
 --- !u!4 &1683591274
@@ -40493,7 +40493,7 @@ MonoBehaviour:
   isAttackPoint: 0
   neighbours:
   - {fileID: 1393714173}
-  rot: {x: 0, y: 0, z: 0, w: 0}
+  rot: {x: 0, y: 0.7933533, z: 0, w: 0.6087614}
   enteringAction: {fileID: 0}
   requiredHidingSpot: couch
 --- !u!1001 &1754195817

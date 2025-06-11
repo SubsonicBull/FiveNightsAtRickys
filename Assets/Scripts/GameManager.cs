@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private EntityManager eM;
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
         }
 
         //Next night
-        if (time == 6)
+        if (time == 6 && !eM.GetAtackOngoing())
         {
             changingNights = true;
             player.LockPlayer(true);
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
             if (night == 5)
             {
                 nM.DisplayStartUI("You Survived all 5 nights");
+                Invoke("BackToMenu", 4f);
             }
             else
             {
@@ -284,5 +286,10 @@ public class GameManager : MonoBehaviour
         {
             astra.Go();
         }
+    }
+
+    void BackToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
