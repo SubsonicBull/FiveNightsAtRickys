@@ -39,6 +39,10 @@ public class EntityManager : MonoBehaviour
         {
             Destroy(e.gameObject);
         }
+        foreach(Entity e in entitiesAwake)
+        {
+            e.GetWaypoint().Free();
+        }
         entitiesAwake.Clear();
     }
 
