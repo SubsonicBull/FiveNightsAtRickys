@@ -8,6 +8,7 @@ public class NightUIManager : MonoBehaviour
     [SerializeField] private GameObject nightUI;
     [SerializeField] private TMP_Text nightText;
     [SerializeField] private GameObject panel;
+    [SerializeField] private AudioSource audioSource;
     Image im;
 
     private void Start()
@@ -35,6 +36,7 @@ public class NightUIManager : MonoBehaviour
 
     public void DisplayNightUI(string t, bool st)
     {
+        audioSource.Play();
         StartCoroutine(DispNightUI(t, st));
     }
 
