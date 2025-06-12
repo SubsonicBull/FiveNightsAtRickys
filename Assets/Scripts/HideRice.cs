@@ -3,6 +3,9 @@ using UnityEngine;
 public class HideRice : Interactable
 {
     [SerializeField] private GameObject bowl;
+    [SerializeField] private AudioClip open;
+    [SerializeField] private AudioClip close;
+    [SerializeField] private AudioSource audioSource;
     private void Awake()
     {
         SetIsUIInteraction(false);
@@ -30,6 +33,8 @@ public class HideRice : Interactable
             SetName("hide rice");
             SetDescribtion("hiding rice...");
             bowl.SetActive(false);
+            audioSource.clip = open;
+            audioSource.Play();
             ActionMaster.SetRiceHidden(false);
         }
         else
@@ -37,6 +42,8 @@ public class HideRice : Interactable
             SetName("remove bowl");
             SetDescribtion("removing bowl...");
             bowl.SetActive(true);
+            audioSource.clip = close;
+            audioSource.Play();
             ActionMaster.SetRiceHidden(true);
         }
         Done.Invoke();

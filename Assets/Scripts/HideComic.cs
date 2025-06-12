@@ -4,6 +4,9 @@ public class HideComic : Interactable
 {
     [SerializeField] private Transform hidePos;
     [SerializeField] private Transform tablePos;
+    [SerializeField] private AudioClip hide;
+    [SerializeField] private AudioClip show;
+    [SerializeField] private AudioSource audioSource;
     private bool hidden = true;
     private void Awake()
     {
@@ -32,6 +35,8 @@ public class HideComic : Interactable
             transform.position = tablePos.position;
             SetName("hide comic");
             hidden = false;
+            audioSource.clip = show;
+            audioSource.Play();
             ActionMaster.SetComicHidden(false);
         }
         else
@@ -39,6 +44,8 @@ public class HideComic : Interactable
             transform.position = hidePos.position;
             SetName("put comic on table");
             hidden = true;
+            audioSource.clip = hide;
+            audioSource.Play();
             ActionMaster.SetComicHidden(true);
         }
         Done.Invoke();

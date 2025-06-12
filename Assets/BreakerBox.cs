@@ -14,6 +14,9 @@ public class BreakerBox : Interactable
     private bool isMoving = false;
 
     [SerializeField] private TMP_Text powertext;
+    [SerializeField] private AudioClip openClip;
+    [SerializeField] private AudioClip closeClip;
+    [SerializeField] private AudioSource audioSource;
 
     private void Start()
     {
@@ -47,12 +50,16 @@ public class BreakerBox : Interactable
 
     public override void UIInteract()
     {
+        audioSource.clip = openClip;
+        audioSource.Play();
         shouldOpen = true;
         isMoving = true;
     }
 
     public override void QuitUIInteraction()
     {
+        audioSource.clip = closeClip;
+        audioSource.Play();
         shouldOpen = false;
         isMoving = true;
     }
