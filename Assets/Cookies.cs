@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Cookies : Interactable
 {
-    private GameObject volume;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private GameObject coookies;
+    private BoxCollider coll;
     void Start()
     {
         SetName("Eat Luis' \"special\" cookies");
@@ -11,6 +13,7 @@ public class Cookies : Interactable
         SetDuration(1f);
         SetLocksPlayer(false);
         SetUnlocksCursor(false);
+        coll = GetComponent<BoxCollider>();
     }
     public override void StartInteraction()
     {
@@ -25,7 +28,9 @@ public class Cookies : Interactable
     void Eat()
     {
         ActionMaster.SetPlayerProtected(true);
+        audioSource.Play();
         Done.Invoke();
-        Destroy(gameObject);
+        coll.enabled = false;
+        Destroy(coookies);
     }
 }
