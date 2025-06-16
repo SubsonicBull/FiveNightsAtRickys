@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         nM = GameObject.Find("NightUIManager").GetComponent<NightUIManager>();
         changingNights = true;
         player.LockPlayer(true);
-        nM.DisplayStartUI("Night 1");
+        nM.DisplayStartUI("Night " + night.ToString());
         Invoke("ResetTime", 4f);
         playerStartPos = player.gameObject.transform.position;
         playerStartRotation = player.gameObject.transform.rotation;
@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
             player.LockPlayer(true);
             eM.ResetEntities();
             entitiesSpawned = 0;
+            astraAttacks = 0;
             if (night == 5)
             {
                 nM.DisplayStartUI("You Survived all 5 nights");

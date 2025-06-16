@@ -10,6 +10,7 @@ public static class ActionMaster
     private static string hidingSpotName = "couch";
     private static bool isScreaming = false;
     private static bool flashlightOn = false;
+    private static bool playerProtected = false;
 
     private static int power = 100;
 
@@ -20,6 +21,7 @@ public static class ActionMaster
     public static void SetPlayerHidden(bool b) { playerHidden = b; }
     public static void SetIsScreaming(bool b) { isScreaming = b; }
     public static void SetFlashlightOn(bool b) { flashlightOn = b; }
+    public static void SetPlayerProtected(bool b) { playerProtected = b; }
 
     public static void SetHidingSpot(string s) { hidingSpotName = s; }
     public static void SetSong(string s) { song = s; }
@@ -41,6 +43,7 @@ public static class ActionMaster
     }
 
     //Getter
+    public static bool GetPlayerProtected() { return playerProtected; }
     public static bool GetFlashlightOn() { return flashlightOn; }
     public static bool GetComicHidden() { return comicHidden; }
     public static bool GetRiceHidden() { return riceHidden; }

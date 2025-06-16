@@ -54,7 +54,7 @@ public class Entity : MonoBehaviour
         }
 
         //Checking for Player and required actions/hidingspot
-        if (checkForPlayer && !executeAttack)
+        if (checkForPlayer && !executeAttack && !ActionMaster.GetPlayerProtected())
         {
             bool requiredCharacterActions = false;
             bool requiredHidingSpot = false;
@@ -190,6 +190,7 @@ public class Entity : MonoBehaviour
     void StopAttack()
     {
         MoveToPos(lastPos, lastRot);
+        ActionMaster.SetPlayerProtected(false);
         currentWaypoint.GetEnteringAction().Action();
         Invoke("GoBackToWaypoint", 6f);
     }
