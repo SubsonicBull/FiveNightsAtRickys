@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private float distancetoground;
     [SerializeField] LayerMask groundLayerMask;
     private Vector3 velocity;
+    private Vector2 xzVelocity = new Vector2(0, 0);
     private bool isGrounded;
 
     //Cam
@@ -132,6 +133,7 @@ public class Player : MonoBehaviour
         if(!locked)
         {
             Vector3 move = transform.right * x + transform.forward * z;
+            xzVelocity = new Vector2(move.x, move.z);
             crcon.Move(move * speed * Time.deltaTime);
             velocity.y -= gravity * Time.deltaTime;
             crcon.Move(velocity);
@@ -271,4 +273,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    public Vector3 GetXZVelocity()
+    {
+        return xzVelocity;
+    }
+
+    public bool GetIsLocked()
+    {
+        return locked;
+    }
 }
