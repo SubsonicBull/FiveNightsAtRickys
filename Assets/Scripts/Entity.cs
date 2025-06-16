@@ -118,7 +118,7 @@ public class Entity : MonoBehaviour
         isAttacking = true;
         audioSource.clip = sign;
         audioSource.Play();
-        Invoke("Enter", 6f);
+        Invoke("Enter", 8f);
     }
 
     void Enter()
